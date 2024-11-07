@@ -32,6 +32,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
+import androidx.navigation.compose.rememberNavController
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -125,6 +126,12 @@ fun CountryNewScreen(navController: NavController) {
             }
         }
     }
+}
+@Composable
+@Preview(showBackground = true)
+fun PrevCountryNewScreen(){
+    val navController = rememberNavController()
+    CountryNewScreen(navController = navController)
 }
 
 fun registerCountry(name: String, capital: String, image: String, context: Context, navController: NavController) {
