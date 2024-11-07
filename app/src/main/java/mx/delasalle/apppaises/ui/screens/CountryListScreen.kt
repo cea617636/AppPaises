@@ -1,3 +1,4 @@
+import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
@@ -25,13 +26,14 @@ import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavController
-import coil3.compose.AsyncImage
+import coil.compose.AsyncImage
 import mx.delasalle.apppaises.model.Country
 import mx.delasalle.apppaises.ui.viewmodels.CountryUiState
 import mx.delasalle.apppaises.ui.viewmodels.CountryViewModel
@@ -55,10 +57,23 @@ fun CountryListScreen(navController: NavController,
     ){paddingValues ->
         Box(modifier = Modifier
             .fillMaxSize()
-            .padding(paddingValues)){
+            .padding(paddingValues)
+            .background(
+                brush = Brush.linearGradient(
+                    colors = listOf(Color(0xFF1E88E5), Color(0xFF42A5F5), Color(0xFF90CAF9))
+                )
+            ),
+            contentAlignment = Alignment.Center
+            ){
             when(uiState){
                 is CountryUiState.Loading ->{
-                    CircularProgressIndicator(modifier = Modifier.align(Alignment.Center))
+                    //CircularProgressIndicator(modifier = Modifier.align(Alignment.Center))
+                    CircularProgressIndicator(
+                        color = Color.White, // Color para mejor contraste
+                        modifier = Modifier
+                            .size(50.dp) // Tamaño opcional
+                            .align(Alignment.Center)
+                    )
                 }
                 is CountryUiState.Success ->{
                     val countries = (uiState as CountryUiState.Success).countries
